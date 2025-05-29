@@ -33,7 +33,18 @@ public class VisaoDeTexto implements VisaoSimulador {
      */
     @Override
     public void mostrarStatus(int passo, Campo campo) {
-        
+        estatisticas.reiniciar();
+
+        for(int linha = 0; linha < campo.obterComprimento(); linha++) {
+            for(int coluna = 0; coluna < campo.obterLargura(); coluna++) {
+                Object animal = campo.obterObjetoEm(linha, coluna);
+                if(animal != null) {
+                    estatisticas.incrementarContagem(animal.getClass());
+                }
+            }
+        }
+
+        System.out.println("Passo: " + passo + " - " + estatisticas.obterDetalhesPopulacao(campo));
     }
     
     /**
